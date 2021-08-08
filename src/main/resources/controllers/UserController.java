@@ -31,4 +31,10 @@ public class UserController {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable("id") Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
+        return ReponseEntity.ok().build();
+    }
 }
